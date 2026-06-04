@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sake-wine | あなたの一杯を記録するお酒の手帳</title>
+    <meta name="description" content="飲んだ日本酒・ワインを写真と評価で記録。お店の場所は地図で振り返り。あなただけのお酒の手帳アプリ「sake-wine」。">
+    <meta property="og:title" content="sake-wine | あなたの一杯を記録するお酒の手帳">
+    <meta property="og:description" content="飲んだ日本酒・ワインを写真と評価で記録。お店の場所は地図で振り返り。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./assets/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --brand: #6366f1;
+            --brand-dark: #4f46e5;
+            --wine: #7b2d4e;
+            --ink: #1a1a1a;
+            --muted: #6b7280;
+            --bg: #fafafa;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            color: var(--ink);
+            background-color: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brand) 0%, var(--wine) 100%);
+            color: #fff;
+            text-align: center;
+            padding: 72px 20px 88px;
+        }
+        .hero .app-icon {
+            width: 104px; height: 104px;
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            margin-bottom: 24px;
+        }
+        .hero h1 { font-size: 40px; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .hero .tagline { font-size: 18px; opacity: 0.95; max-width: 540px; margin: 0 auto 32px; }
+        .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .btn-primary { background: #fff; color: var(--brand-dark); box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+        .btn-ghost { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.5); }
+        .btn:hover { transform: translateY(-2px); }
+
+        /* Section */
+        section { padding: 64px 0; }
+        .section-title { text-align: center; font-size: 28px; margin-bottom: 12px; color: var(--ink); }
+        .section-sub { text-align: center; color: var(--muted); margin-bottom: 44px; }
+
+        /* Features grid */
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .feature {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .feature:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0,0,0,0.1); }
+        .feature .emoji { font-size: 34px; display: block; margin-bottom: 14px; }
+        .feature h3 { font-size: 18px; margin-bottom: 8px; }
+        .feature p { color: var(--muted); font-size: 15px; }
+
+        /* Steps */
+        .steps-wrap { background: #fff; }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .step { text-align: center; }
+        .step .num {
+            width: 44px; height: 44px; line-height: 44px;
+            border-radius: 50%;
+            background: var(--brand); color: #fff;
+            font-weight: 700; margin: 0 auto 16px;
+        }
+        .step h3 { font-size: 17px; margin-bottom: 6px; }
+        .step p { color: var(--muted); font-size: 15px; }
+
+        /* Footer */
+        footer {
+            background: #11131a;
+            color: #cbd0dc;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 14px;
+        }
+        footer .foot-icon { width: 40px; height: 40px; border-radius: 10px; margin-bottom: 12px; }
+        footer a { color: #aab2c5; text-decoration: none; margin: 0 10px; }
+        footer a:hover { color: #fff; text-decoration: underline; }
+        footer .copyright { margin-top: 16px; color: #6b7280; }
+
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 32px; }
+            .features, .steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <img class="app-icon" src="./assets/icon.png" alt="sake-wine アプリアイコン">
+        <h1>sake-wine</h1>
+        <p class="tagline">飲んだ日本酒・ワインを、写真と評価でかんたん記録。<br>「あの一杯、どこで飲んだっけ？」をなくす、あなただけのお酒の手帳。</p>
+        <div class="cta-row">
+            <a class="btn btn-primary" href="#features">特徴を見る</a>
+            <a class="btn btn-ghost" href="#how">使い方</a>
+        </div>
+    </header>
+
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">sake-wine でできること</h2>
+            <p class="section-sub">記録するほど、自分の「好き」が見えてくる。</p>
+            <div class="features">
+                <div class="feature">
+                    <span class="emoji">🍶</span>
+                    <h3>お酒を記録</h3>
+                    <p>銘柄・種類・評価・メモを残して、飲んだお酒を一覧で振り返り。日本酒もワインもこれ1つで。</p>
+                </div>
+                <div class="feature">
+                    <span class="emoji">📷</span>
+                    <h3>写真でアルバム</h3>
+                    <p>ラベルやグラスの写真を添えて記録。見返すだけで、その日の味と気分がよみがえります。</p>
+                </div>
+                <div class="feature">
+                    <span class="emoji">⭐️</span>
+                    <h3>評価で整理</h3>
+                    <p>お気に入りを評価で管理。次に選ぶときの自分だけのレコメンドになります。</p>
+                </div>
+                <div class="feature">
+                    <span class="emoji">📍</span>
+                    <h3>お店を記録</h3>
+                    <p>飲んだお店や買った場所を保存。「また行きたい」をしっかり残せます。</p>
+                </div>
+                <div class="feature">
+                    <span class="emoji">🗺️</span>
+                    <h3>地図で振り返り</h3>
+                    <p>記録した場所を地図で表示。旅先や行きつけのお店を、地図の上で楽しめます。</p>
+                </div>
+                <div class="feature">
+                    <span class="emoji">📱</span>
+                    <h3>シンプル設計</h3>
+                    <p>思い立ったらすぐ記録できる、軽快で迷わないインターフェース。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how" class="steps-wrap">
+        <div class="container">
+            <h2 class="section-title">使い方はかんたん3ステップ</h2>
+            <p class="section-sub">飲んだその場で、サッと残せます。</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="num">1</div>
+                    <h3>お酒を選ぶ</h3>
+                    <p>日本酒かワインを選んで、銘柄や種類を入力します。</p>
+                </div>
+                <div class="step">
+                    <div class="num">2</div>
+                    <h3>写真と評価を追加</h3>
+                    <p>写真を撮って、評価とひとことメモを添えるだけ。</p>
+                </div>
+                <div class="step">
+                    <div class="num">3</div>
+                    <h3>場所を残す</h3>
+                    <p>飲んだお店を記録すれば、あとから地図で振り返れます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <img class="foot-icon" src="./assets/icon.png" alt="sake-wine">
+        <div>
+            <!-- プライバシーポリシー・利用規約は準備中（後日リンクを追加） -->
+        </div>
+        <div class="copyright">&copy; 2026 sake-wine. All rights reserved.</div>
+    </footer>
+</body>
+</html>

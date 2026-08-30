@@ -55,22 +55,8 @@ a { color: inherit; text-decoration: none; }
 .btn-ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: 0 2px 10px rgba(20,20,40,.05); }
 .btn-ghost:hover { transform: translateY(-2px); border-color: var(--purple); }
 
-/* soon pill */
-.soon {
-    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
-    padding: 13px 24px; border-radius: 999px; font-weight: 700; font-size: 15px;
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    color: var(--ink); background: #fff;
-    position: relative;
-}
-.soon::before {
-    content: ""; position: absolute; inset: 0; border-radius: 999px; padding: 1.6px;
-    background: var(--flow);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-}
-.soon .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px var(--amber); }
-.soon small { color: var(--faint); font-weight: 500; font-size: 12px; }
+/* hero note (App Store ボタン直下) */
+.hero-note { text-align: center; color: var(--faint); font-size: 13px; margin-top: 14px; }
 
 /* ===== Nav ===== */
 .nav {
@@ -85,7 +71,8 @@ a { color: inherit; text-decoration: none; }
 .nav-links { display: flex; gap: 34px; font-size: 15px; font-weight: 500; color: var(--ink); font-family: 'Zen Kaku Gothic New', sans-serif; }
 .nav-links a { letter-spacing: 1px; }
 .nav-links a:hover { color: var(--purple); }
-.nav-soon { font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 999px; position: relative; font-family: 'Zen Kaku Gothic New', sans-serif; background: #fff; }
+.nav-soon { display: inline-block; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 999px; position: relative; font-family: 'Zen Kaku Gothic New', sans-serif; background: #fff; transition: transform .16s ease, box-shadow .16s ease; }
+.nav-soon:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(168,85,247,.24); }
 .nav-soon::before { content:""; position:absolute; inset:0; border-radius:999px; padding:1.6px; background: var(--flow); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
 .nav-soon span { background: var(--flow); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -245,13 +232,13 @@ footer .concept { color: var(--muted); margin-bottom: 18px; font-size: 13px; let
 @keyframes pulseGlow { 0%,100% { opacity: .82; transform: scale(1); } 50% { opacity: 1; transform: scale(1.07); } }
 @keyframes growLine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 @keyframes peakGlow { 0%,100% { box-shadow: 0 0 12px rgba(245,158,11,.8); transform: scale(1); } 50% { box-shadow: 0 0 24px rgba(245,158,11,1); transform: scale(1.14); } }
-@keyframes pillPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,.5); } 70% { box-shadow: 0 0 0 8px rgba(245,158,11,0); } }
 
 /* Hero entrance (staggered) */
 .hero .eyebrow { animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) both .1s; }
 .hero .wordmark-wrap { animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) both .25s; }
 .hero .tagline { animation: fadeUp .7s ease both .58s; }
 .hero .hero-cta { animation: fadeUp .7s ease both .72s; }
+.hero .hero-note { animation: fadeUp .7s ease both .8s; }
 .hero .fan { animation: fadeUp 1s cubic-bezier(.2,.7,.2,1) both .86s; }
 
 /* Flowing gradient */
@@ -273,9 +260,6 @@ footer .concept { color: var(--muted); margin-bottom: 18px; font-size: 13px; let
 .orb-amber { animation: floatA 4.2s ease-in-out infinite .4s; }
 .orb-purple { animation: floatA 6s ease-in-out infinite .8s; }
 .orb-pink { animation: pulseGlow 7s ease-in-out infinite; }
-
-/* Soon pill heartbeat */
-.soon .dot, .nav-soon::after { animation: pillPulse 2.4s ease-in-out infinite; }
 
 /* Timeline draw on scroll (1c) */
 .tl::before { transform: scaleY(0); transform-origin: top; }
@@ -340,9 +324,11 @@ footer .concept { color: var(--muted); margin-bottom: 18px; font-size: 13px; let
 .store-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 .store-btn {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 10px 18px; border-radius: 12px; background: #000; color: #fff;
-    cursor: default; box-shadow: 0 8px 22px rgba(0,0,0,.22);
+    padding: 12px 22px; border-radius: 12px; background: #000; color: #fff;
+    cursor: pointer; box-shadow: 0 8px 22px rgba(0,0,0,.22);
+    transition: transform .16s ease, box-shadow .16s ease;
 }
+.store-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(0,0,0,.34); }
 .store-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
 .store-btn .lbl { display: flex; flex-direction: column; line-height: 1.05; text-align: left; }
 .store-btn .lbl small { font-size: 10px; font-weight: 500; opacity: .85; }
@@ -411,6 +397,42 @@ footer .concept { color: var(--muted); margin-bottom: 18px; font-size: 13px; let
 .music-btn svg { width: 18px; height: 18px; fill: #fff; }
 .fsec-note { color: var(--faint); font-size: 12.5px; margin-top: 16px; max-width: 420px; }
 
+/* playlist card (04 PLAYLIST のビジュアル・実画面ではなくイメージ) */
+.pl-card {
+    width: 100%; max-width: 400px;
+    background: linear-gradient(170deg,#14141d,#0c0c12);
+    border-radius: 26px; padding: 26px 26px 22px;
+    box-shadow: 0 34px 70px rgba(30,15,60,.3);
+}
+.pl-head { display: flex; align-items: center; gap: 14px; padding-bottom: 18px; border-bottom: 1px solid #23232e; }
+.pl-art { width: 54px; height: 54px; border-radius: 14px; background: var(--flow); display: flex; align-items: center; justify-content: center; font-family: 'Sora',sans-serif; font-weight: 800; font-size: 24px; color: #fff; flex-shrink: 0; }
+.pl-meta { min-width: 0; }
+.pl-kicker { font-family: 'Sora',sans-serif; letter-spacing: 3px; font-size: 10px; color: var(--cyan); }
+.pl-name { color: #fff; font-family: 'Zen Kaku Gothic New',sans-serif; font-weight: 700; font-size: 17px; margin-top: 3px; }
+.pl-sub { color: #6b6b75; font-size: 11.5px; margin-top: 3px; }
+.pl-list { list-style: none; margin: 14px 0 0; display: grid; gap: 2px; }
+.pl-list li { display: flex; align-items: center; gap: 14px; color: #d6d6e0; font-size: 14px; padding: 9px 10px; border-radius: 10px; }
+.pl-list li .n { font-family: 'Sora',sans-serif; font-size: 11px; color: #55555f; letter-spacing: 1px; }
+.pl-list li.peak { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.35); color: var(--amber); font-weight: 700; }
+.pl-list li.peak .n { color: var(--amber); }
+.pl-peak { margin-left: auto; font-family: 'Sora',sans-serif; font-size: 9px; letter-spacing: 2px; color: var(--amber); }
+.pl-list li.more { color: #55555f; font-size: 12px; padding-left: 34px; }
+.pl-foot { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; padding-top: 16px; border-top: 1px solid #23232e; }
+.pl-badge { font-size: 11.5px; font-weight: 700; padding: 7px 14px; border-radius: 999px; font-family: 'Zen Kaku Gothic New',sans-serif; }
+.pl-badge.sp { background: rgba(30,215,96,.14); color: #1ED760; }
+.pl-badge.am { background: rgba(250,57,85,.14); color: #FA3955; }
+
+/* live record card (07 ALL IN ONE のビジュアル・実画面ではなくイメージ) */
+.rec-set { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 18px; padding: 12px 14px; border-radius: 12px; background: rgba(168,85,247,.1); border: 1px solid rgba(168,85,247,.28); }
+.rec-set-t { color: #fff; font-family: 'Zen Kaku Gothic New',sans-serif; font-weight: 700; font-size: 14px; }
+.rec-set-n { color: #9a9aa6; font-size: 12px; }
+.rec-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.rec-tile { background: #16161f; border: 1px solid #23232e; border-radius: 12px; padding: 12px 14px; }
+.rec-tile .k { color: #6b6b75; font-size: 11.5px; }
+.rec-tile .v { color: #fff; font-family: 'Zen Kaku Gothic New',sans-serif; font-weight: 700; font-size: 16px; margin-top: 3px; }
+.rec-tile .v.amber { color: var(--amber); }
+.rec-tile .v.cyan { color: var(--cyan); }
+
 /* stats mini cards */
 .stat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; max-width: 460px; }
 .stat-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; box-shadow: 0 4px 14px rgba(30,15,60,.05); }
@@ -430,6 +452,7 @@ footer .concept { color: var(--muted); margin-bottom: 18px; font-size: 13px; let
 .float-chip.fc-1 { top: 40px; left: 0; }
 .float-chip.fc-2 { bottom: 60px; right: -6px; }
 .float-chip.fc-2 .big { font-size: 15px; }
+.float-chip.jp .big { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: .5px; }
 
 /* ===== REPLAY dark section (02) ===== */
 .replay-dark { background: linear-gradient(180deg,#0B0B0F,#140c22 60%,#0B0B0F); color: #fff; position: relative; overflow: hidden; }
@@ -474,7 +497,9 @@ footer .concept { color: var(--muted); margin-bottom: 18px; font-size: 13px; let
 .price-list li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; }
 .price-list .ck { color: #22C55E; font-weight: 800; }
 .price-card.pro .price-list .ck { color: var(--amber); }
-.price-cta { display: block; text-align: center; padding: 14px; border-radius: 999px; font-weight: 700; font-family:'Zen Kaku Gothic New',sans-serif; position: relative; cursor: default; }
+.price-cta { display: block; text-align: center; padding: 14px; border-radius: 999px; font-weight: 700; font-family:'Zen Kaku Gothic New',sans-serif; position: relative; cursor: pointer; transition: transform .16s ease, box-shadow .16s ease; }
+.price-cta:hover { transform: translateY(-2px); }
+.price-card.pro .price-cta:hover { box-shadow: 0 16px 36px rgba(168,85,247,.5); }
 .price-card.free .price-cta { background: #fff; border: 1px solid var(--ink); color: var(--ink); }
 .price-card.pro .price-cta { background: var(--btn); color: #fff; box-shadow: 0 12px 28px rgba(168,85,247,.4); }
 

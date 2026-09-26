@@ -56,7 +56,9 @@
       open.style.display = "none";
       return;
     }
-    var appUrl = "setora://import#" + hash;
+    // ⚠️ アプリ側の実在ルート名 + クエリで渡す。存在しないパスだとアプリ未起動からの起動が
+    //    スプラッシュのまま止まる（expo-router がルートを解決できないため）。
+    var appUrl = "setora://import-setlist?payload=" + hash;
     open.setAttribute("href", appUrl);
     // 自動で一度だけアプリを開きにいく。未インストールなら何も起きず、このページが残る。
     setTimeout(function () { location.href = appUrl; }, 350);

@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["9HGN85HM9X.com.setora"],
+        "components": [
+          { "/": "/setora/s", "comment": "セットリスト共有リンク" },
+          { "/": "/setora/s*", "comment": "セットリスト共有リンク（フラグメント付き）" }
+        ]
+      }
+    ]
+  }
+}

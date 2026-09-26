@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>セットリストを受け取る | Setora</title>
+<meta name="robots" content="noindex">
+<!--
+  セトリ共有リンク／QRの着地ページ。
+  データは URL の # 以降にあり、**サーバーへは送られない**（このページ内だけで扱う）。
+  ここから setora:// スキームでアプリを開く。アプリが無ければ App Store へ案内する。
+  ※ Universal Links を設定すれば Safari を経由せず直接アプリが開くようになる（未設定）。
+-->
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(1200px 600px at 50% -10%, #2a1b4a 0%, #0b0a12 60%);
+    color: #f5f5fa; padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  }
+  .card { width: 100%; max-width: 380px; text-align: center; }
+  .brand { font-size: 22px; font-weight: 800; letter-spacing: .5px;
+    background: linear-gradient(100deg, #ff5f9e, #b36cff 55%, #5ad1e6);
+    -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 26px; }
+  h1 { font-size: 19px; margin: 0 0 8px; }
+  p { color: #b9b9c6; font-size: 14px; line-height: 1.7; margin: 0 0 24px; }
+  .btn { display: block; width: 100%; padding: 15px; border-radius: 14px; font-weight: 700;
+    font-size: 15px; text-decoration: none; margin-bottom: 12px; }
+  .primary { background: linear-gradient(100deg, #b36cff, #ff5f9e); color: #fff; }
+  .ghost { border: 1px solid rgba(255,255,255,.18); color: #d6d6de; }
+  .note { font-size: 12px; color: #8a8a99; margin-top: 18px; line-height: 1.7; }
+  .err { display: none; color: #ffb4c8; font-size: 13px; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">Setora</div>
+    <h1>セットリストが届いています</h1>
+    <p id="lead">アプリで開くと、あなたの記録として取り込めます。</p>
+    <p class="err" id="err">リンクにセットリストのデータが含まれていません。送り主にもう一度共有してもらってください。</p>
+    <a class="btn primary" id="open" href="#">Setora で開く</a>
+    <a class="btn ghost" href="https://apps.apple.com/jp/app/id6780333885">App Store で入手する</a>
+    <p class="note">
+      セットリストの中身はこのページのURLに含まれており、<br>サーバーには送信されません。
+    </p>
+  </div>
+<script>
+  (function () {
+    var hash = location.hash ? location.hash.slice(1) : "";
+    var open = document.getElementById("open");
+    if (!hash) {
+      document.getElementById("lead").style.display = "none";
+      document.getElementById("err").style.display = "block";
+      open.style.display = "none";
+      return;
+    }
+    var appUrl = "setora://import#" + hash;
+    open.setAttribute("href", appUrl);
+    // 自動で一度だけアプリを開きにいく。未インストールなら何も起きず、このページが残る。
+    setTimeout(function () { location.href = appUrl; }, 350);
+  })();
+</script>
+</body>
+</html>

@@ -1,1 +1,8 @@
+# Setora / working-kyi の app-ads.txt 正本（P2-10）。
+# working-kyi.github.io のドメイン直下（= https://working-kyi.github.io/app-ads.txt）に配置すること。
+# このドメインを「開発者サイト(marketing URL)」に設定した全アプリの AdMob publisher を列挙する。
+#   - pub-5222076638012117 = Setora の AdMob アカウント
+#   - pub-8316896340985213 = sake-wine 由来（同ドメインを使う場合は併記が必要）
+# 認証局ID f08c47fec0942fa0 は Google AdMob 共通の固定値。
+google.com, pub-5222076638012117, DIRECT, f08c47fec0942fa0
 google.com, pub-8316896340985213, DIRECT, f08c47fec0942fa0

@@ -59,9 +59,30 @@
     // ⚠️ アプリ側の実在ルート名 + クエリで渡す。存在しないパスだとアプリ未起動からの起動が
     //    スプラッシュのまま止まる（expo-router がルートを解決できないため）。
     var appUrl = "setora://import-setlist?payload=" + hash;
+    var storeUrl = "https://apps.apple.com/jp/app/id6780333885";
     open.setAttribute("href", appUrl);
-    // 自動で一度だけアプリを開きにいく。未インストールなら何も起きず、このページが残る。
-    setTimeout(function () { location.href = appUrl; }, 350);
+
+    // ⚠️ **読み込み時に自動で setora:// へ飛ばしてはいけない。**
+    //    アプリ未インストールの端末では iOS がスキームを処理できず、
+    //    何も押していないのに「ページを開けません。アドレスが無効です。」が出る。
+    //    セトリを受け取る人はアプリを持っていないことが多い＝この導線で一番見られる画面なので、
+    //    **タップされたときだけ**開きにいき、開けなければ App Store へ送る。
+    var left = false;
+    var markLeft = function () { left = true; };
+    // アプリが開くと Safari はバックグラウンドへ回る。それを検知してフォールバックを止める
+    document.addEventListener("visibilitychange", function () { if (document.hidden) markLeft(); });
+    window.addEventListener("pagehide", markLeft);
+    window.addEventListener("blur", markLeft);
+
+    open.addEventListener("click", function (e) {
+      e.preventDefault();
+      left = false;
+      location.href = appUrl;
+      // 1.5秒たってもこのページが前面のまま＝アプリが無い。ストアへ案内する
+      setTimeout(function () {
+        if (!left && !document.hidden) location.href = storeUrl;
+      }, 1500);
+    });
   })();
 </script>
 </body>
